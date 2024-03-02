@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Products.module.scss';
 import { useDispatch } from 'react-redux'
-import { showSelectedProduct } from '../../utils/selectedProductSlice'
+import { showSelectedProduct, getSelectedProduct } from '../../utils/selectedProductSlice'
 import { isURL } from '../../utils/functions';
 
 interface Product {
@@ -24,6 +24,11 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const dispatch = useDispatch()
+
+  const onClickDispatch = (productId: number) => {
+    dispatch(showSelectedProduct(true))
+    dispatch(getSelectedProduct(productId))
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,7 +66,7 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
                 <div className={styles["product__category"]}>{product.category.name}</div>
                 <button
                   aria-label="View details"
-                  onClick={() => dispatch(showSelectedProduct(true))}
+                  onClick={() => onClickDispatch(product.id)}
                   className={styles["product__details-button"]}
                 >
                   View details

@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface selectedProductSliceState {
   showModal: boolean;
+  selectedProductId: number
 }
 
 const initialState: selectedProductSliceState = {
-  showModal: false
+  showModal: false,
+  selectedProductId: 0
 };
 
 export const selectedProductSlice = createSlice({
@@ -15,9 +17,12 @@ export const selectedProductSlice = createSlice({
     showSelectedProduct: (state, action: PayloadAction<boolean>) => {
       state.showModal = action.payload;
     },
+    getSelectedProduct: (state, action: PayloadAction<number>) => {
+      state.selectedProductId = action.payload;
+    },
   }
 });
 
-export const { showSelectedProduct } = selectedProductSlice.actions;
+export const { showSelectedProduct, getSelectedProduct } = selectedProductSlice.actions;
 
 export default selectedProductSlice.reducer;

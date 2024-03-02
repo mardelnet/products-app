@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ProductDetails.module.scss';
 import { useDispatch, useSelector } from 'react-redux'
-import { showSelectedProduct } from '../../utils/selectedProductSlice'
+import { showSelectedProduct, getSelectedProduct } from '../../utils/selectedProductSlice'
 
 interface Product {
   id: number;
@@ -26,11 +26,13 @@ const ProductDetails: React.FC<ProductsProps> = () => {
 
   // @ts-ignore
   const showModal = useSelector(state => state.counter.showModal)
+  // @ts-ignore
+  const getChosenProduct = useSelector(state => state.counter.selectedProductId)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.escuelajs.co/api/v1/products/15');
+        const response = await fetch(`https://api.escuelajs.co/api/v1/products/${getChosenProduct}`);
         const jsonData: Product = await response.json();
         setProduct(jsonData);
         setLoading(false);
@@ -39,7 +41,7 @@ const ProductDetails: React.FC<ProductsProps> = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [getChosenProduct]);
   
   return (
     <div>
@@ -62,6 +64,7 @@ const ProductDetails: React.FC<ProductsProps> = () => {
                 <div className={styles["product__description"]}>{product.description}</div>
                 <div className={styles["product__price"]}>$ {product.price}</div>
                 <div className={styles["product__category"]}>{product.category.name}</div>
+                aa: {getChosenProduct}
               </div>
             </div>
           </div>
