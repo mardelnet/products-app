@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Products.module.scss';
+import { useDispatch } from 'react-redux'
+import { saveProductId } from '../../features/counter/counterSlice'
 
 interface Product {
   id: number;
@@ -19,6 +21,8 @@ interface ProductsProps {
 const Products: React.FC<ProductsProps> = ({ category }) => {
   const [products, setProducts] = useState<Product[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +57,15 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
               <h4 className={styles["product__title"]}>{product.title}</h4>
               <div className={styles["product__price"]}>$ {product.price}</div>
               <div className={styles["product__category"]}>{product.category.name}</div>
+              <div>
+                <button
+                  aria-label="View details"
+                  onClick={() => dispatch(saveProductId(true))}
+                  className={styles["product__details-button"]}
+                >
+                  View details
+                </button>
+              </div>
             </div>
           ))}
         </div>

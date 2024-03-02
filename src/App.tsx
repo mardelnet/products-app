@@ -4,9 +4,13 @@ import Layout from "./pages/Layout";
 import NoPage from "./pages/NoPage";
 import './App.css';
 import Products from "./components/Products/Products";
+import { useSelector } from 'react-redux'
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 
 function App() {
+  // @ts-ignore
+  const count = useSelector(state => state.counter.value)
+
   function ProductsWrapper({ category }: { category: number | null }) {
     const location = useLocation();
     return <Products key={location.pathname} category={category} />;
@@ -28,7 +32,8 @@ function App() {
         </Routes>
       </BrowserRouter>
 
-      <ProductDetails category={null}></ProductDetails>
+      
+      {count && (<ProductDetails category={null}></ProductDetails>)}
     </div>
   );
 }

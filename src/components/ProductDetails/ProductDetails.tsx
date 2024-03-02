@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ProductDetails.module.scss';
+import { useDispatch } from 'react-redux'
+import { saveProductId } from '../../features/counter/counterSlice'
 
 interface Product {
   id: number;
@@ -20,6 +22,8 @@ const ProductDetails: React.FC<ProductsProps> = ({ category }) => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,8 +38,6 @@ const ProductDetails: React.FC<ProductsProps> = ({ category }) => {
     fetchData();
   }, []);
   
-  console.log(product)
-  
   return (
     <div>
       {loading ? (
@@ -45,7 +47,12 @@ const ProductDetails: React.FC<ProductsProps> = ({ category }) => {
           <div className={styles["products-container"]}>
             <div className={styles["product"]}>
               <div className={styles["product__column"]}>
-              <img className={styles["product__image"]} src={product.images[0]} alt={product.title} />
+                <button 
+                  onClick={() => dispatch(saveProductId(false))}
+                  className={styles["product__close"]}>
+                    x
+                </button>
+                <img className={styles["product__image"]} src={product.images[0]} alt={product.title} />
               </div>
               <div className={styles["product__column"]}>
                 <h4 className={styles["product__title"]}>{product.title}</h4>
