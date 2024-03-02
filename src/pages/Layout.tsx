@@ -1,12 +1,18 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
+import styles from "./Layout.module.scss"; // Import the CSS file
 
 const Layout = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
   return (
     <>
-      <nav>
-        <ul>
+      <nav className={styles.nav}>
+        <ul className={showMenu ? styles.show : ""}>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -26,11 +32,20 @@ const Layout = () => {
             <Link to="/miscellaneous">Miscellaneous</Link>
           </li>
         </ul>
+        <button
+          className={`${styles["menu-label"]} ${styles["cart-button"]} ${showMenu ? styles.open : ""}`}
+          onClick={toggleMenu}
+        >
+          CATEGORIES
+        </button>
+        <button className={styles["cart-button"]}>YOUR CART</button>
       </nav>
 
-      <Outlet />
+      <div className="main-container">
+        <Outlet />
+      </div>
     </>
-  )
+  );
 };
 
 export default Layout;

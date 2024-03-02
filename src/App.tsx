@@ -17,7 +17,7 @@ function App() {
   }
 
   return (
-    <div className="main-container">
+    <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -34,7 +34,7 @@ function App() {
 
       
       {count && (<ProductDetails category={null}></ProductDetails>)}
-    </div>
+    </>
   );
 }
 
