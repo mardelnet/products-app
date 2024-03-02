@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Products.module.scss';
 import { useDispatch } from 'react-redux'
-import { saveProductId } from '../../features/counter/counterSlice'
+import { showSelectedProduct } from '../../utils/selectedProductSlice'
 import { isURL } from '../../utils/functions';
 
 interface Product {
@@ -61,7 +61,7 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
                 <div className={styles["product__category"]}>{product.category.name}</div>
                 <button
                   aria-label="View details"
-                  onClick={() => dispatch(saveProductId(true))}
+                  onClick={() => dispatch(showSelectedProduct(true))}
                   className={styles["product__details-button"]}
                 >
                   View details

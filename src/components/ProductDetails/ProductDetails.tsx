@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ProductDetails.module.scss';
 import { useDispatch, useSelector } from 'react-redux'
-import { saveProductId } from '../../features/counter/counterSlice'
+import { showSelectedProduct } from '../../utils/selectedProductSlice'
 
 interface Product {
   id: number;
@@ -25,7 +25,7 @@ const ProductDetails: React.FC<ProductsProps> = () => {
   const dispatch = useDispatch()
 
   // @ts-ignore
-  const showModal = useSelector(state => state.counter.value)
+  const showModal = useSelector(state => state.counter.showModal)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +51,7 @@ const ProductDetails: React.FC<ProductsProps> = () => {
             <div className={styles["product"]}>
               <div className={styles["product__column"]}>
                 <button 
-                  onClick={() => dispatch(saveProductId(false))}
+                  onClick={() => dispatch(showSelectedProduct(false))}
                   className={styles["product__close"]}>
                     x
                 </button>
