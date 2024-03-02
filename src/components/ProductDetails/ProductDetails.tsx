@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ProductDetails.module.scss';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { saveProductId } from '../../features/counter/counterSlice'
 
 interface Product {
@@ -18,11 +18,14 @@ interface ProductsProps {
   category: number | null;
 }
 
-const ProductDetails: React.FC<ProductsProps> = ({ category }) => {
+const ProductDetails: React.FC<ProductsProps> = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const dispatch = useDispatch()
+
+  // @ts-ignore
+  const showModal = useSelector(state => state.counter.value)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +46,7 @@ const ProductDetails: React.FC<ProductsProps> = ({ category }) => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        product && (
+        product && showModal && (
           <div className={styles["products-container"]}>
             <div className={styles["product"]}>
               <div className={styles["product__column"]}>

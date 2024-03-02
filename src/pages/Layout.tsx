@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import styles from "./Layout.module.scss"; // Import the CSS file
+import ProductDetails from "../components/ProductDetails/ProductDetails";
 
 const Layout = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -44,6 +45,8 @@ const Layout = () => {
       <div className="main-container">
         <Outlet />
       </div>
+
+      <ProductDetails category={null}></ProductDetails>
     </>
   );
 };
