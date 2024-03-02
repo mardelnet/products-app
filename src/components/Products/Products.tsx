@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Products.module.scss';
 import { useDispatch } from 'react-redux'
 import { saveProductId } from '../../features/counter/counterSlice'
+import { isURL } from '../../utils/functions';
 
 interface Product {
   id: number;
@@ -52,19 +53,21 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
       ) : (
         <div className={styles["products-container"]}>
           {products && products.map((product) => (
-            <div className={styles["product"]} key={product.id}>
-              <img className={styles["product__image"]} src={product.images[0]} alt={product.title} />
-              <h4 className={styles["product__title"]}>{product.title}</h4>
-              <div className={styles["product__price"]}>$ {product.price}</div>
-              <div className={styles["product__category"]}>{product.category.name}</div>
-              <button
-                aria-label="View details"
-                onClick={() => dispatch(saveProductId(true))}
-                className={styles["product__details-button"]}
-              >
-                View details
-              </button>
-            </div>
+            isURL(product.images[0]) && (
+              <div className={styles["product"]} key={product.id}>
+                <img className={styles["product__image"]} src={product.images[0]} alt={product.title} />
+                <h4 className={styles["product__title"]}>{product.title}</h4>
+                <div className={styles["product__price"]}>$ {product.price}</div>
+                <div className={styles["product__category"]}>{product.category.name}</div>
+                <button
+                  aria-label="View details"
+                  onClick={() => dispatch(saveProductId(true))}
+                  className={styles["product__details-button"]}
+                >
+                  View details
+                </button>
+              </div>
+            )
           ))}
         </div>
       )}
