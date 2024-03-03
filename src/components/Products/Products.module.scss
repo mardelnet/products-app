@@ -25,8 +25,8 @@
     min-height: 75px;
   }
 
-  &__details-button {
-    width: 100%;
+  &__button--details {
+    width: 50%;
     margin: auto;
     padding: 10px;
     background-color: #333;
@@ -37,8 +37,21 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
     border-bottom-left-radius: 5px;
+  }
+
+  &__button--add-to-cart {
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     border-bottom-right-radius: 5px;
   }
 

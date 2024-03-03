@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './ProductDetails.module.scss';
 import { useDispatch, useSelector } from 'react-redux'
-import { showSelectedProduct, getSelectedProduct } from '../../utils/selectedProductSlice'
+import { showSelectedProduct } from '../../utils/selectedProductSlice'
 
 interface Product {
   id: number;
@@ -25,8 +25,6 @@ const ProductDetails: React.FC<ProductsProps> = () => {
   const dispatch = useDispatch()
 
   // @ts-ignore
-  const showModal = useSelector(state => state.counter.showModal)
-  // @ts-ignore
   const getChosenProduct = useSelector(state => state.counter.selectedProductId)
 
   useEffect(() => {
@@ -48,7 +46,7 @@ const ProductDetails: React.FC<ProductsProps> = () => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        product && showModal && (
+        product && (
           <div className={styles["products-container"]}>
             <div className={styles["product"]}>
               <div className={styles["product__column"]}>
@@ -64,7 +62,6 @@ const ProductDetails: React.FC<ProductsProps> = () => {
                 <div className={styles["product__description"]}>{product.description}</div>
                 <div className={styles["product__price"]}>$ {product.price}</div>
                 <div className={styles["product__category"]}>{product.category.name}</div>
-                aa: {getChosenProduct}
               </div>
             </div>
           </div>

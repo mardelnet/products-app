@@ -26,8 +26,8 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
   const dispatch = useDispatch()
 
   const onClickDispatch = (productId: number) => {
-    dispatch(showSelectedProduct(true))
     dispatch(getSelectedProduct(productId))
+    dispatch(showSelectedProduct(true))
   }
 
   useEffect(() => {
@@ -67,9 +67,16 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
                 <button
                   aria-label="View details"
                   onClick={() => onClickDispatch(product.id)}
-                  className={styles["product__details-button"]}
+                  className={styles["product__button--details"]}
                 >
                   View details
+                </button>
+                <button
+                  aria-label="Add to Cart"
+                  onClick={() => onClickDispatch(product.id)}
+                  className={styles["product__button--add-to-cart"]}
+                >
+                  Add to Cart
                 </button>
               </div>
             )
