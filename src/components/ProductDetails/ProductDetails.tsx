@@ -25,7 +25,7 @@ const ProductDetails: React.FC<ProductsProps> = () => {
   const dispatch = useDispatch()
 
   // @ts-ignore
-  const getChosenProduct = useSelector(state => state.counter.selectedProductId)
+  const getChosenProduct = useSelector(state => state.chosenProduct.selectedProductId)
 
   useEffect(() => {
     const fetchData = async () => {

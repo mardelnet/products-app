@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 const Layout = () => {
   // @ts-ignore
-  const showModal = useSelector(state => state.counter.showModal)
+  const showModal = useSelector(state => state.chosenProduct.showModal)
 
   return (
     <>
