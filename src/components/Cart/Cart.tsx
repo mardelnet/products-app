@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from "./Cart.module.scss";
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeProductFromCart } from '../../utils/cartSlice'
 
 interface Product {
   id: number;
@@ -15,8 +16,14 @@ interface CartProps {
 }
 
 const Cart: React.FC<CartProps> = ({ totalPrice }) => {
+  const dispatch = useDispatch()
+
   // @ts-ignore
   const getChosenProduct = useSelector(state => state.cart.productsInCart)
+
+  const onClickRemoveFromCart = (productId: number) => {
+    dispatch(removeProductFromCart(productId));
+  }
   
   return (
     <div className={styles['cart-container']}>
@@ -28,7 +35,13 @@ const Cart: React.FC<CartProps> = ({ totalPrice }) => {
               <div>{product.title}</div>
               $ {product.price} x {product.quantity} units
             </div>
-            <button>Remove</button>
+            <button
+              aria-label="Remove from Cart"
+              onClick={() => onClickRemoveFromCart(product.id)}
+              className={styles["product__button--add-to-cart"]}
+              >
+              Remove
+            </button>
           </div>
         ))}
       </div>
