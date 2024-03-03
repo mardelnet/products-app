@@ -1,8 +1,11 @@
 import React from 'react';
 import styles from "./Cart.module.scss";
-import { useSelector, useDispatch } from 'react-redux'
-import { removeProductFromCart } from '../../utils/cartSlice'
+import { useSelector, useDispatch } from 'react-redux';
+import { removeProductFromCart } from '../../utils/cartSlice';
 
+/**
+ * Interface for representing a product in the cart.
+ */
 interface Product {
   id: number;
   title: string;
@@ -11,16 +14,33 @@ interface Product {
   images: string[];
 }
 
+/**
+ * Interface for the props of the Cart component.
+ */
 interface CartProps {
+  /**
+   * The total price of all products in the cart.
+   */
   totalPrice: number;
 }
 
+/**
+ * A functional component representing the cart.
+ * Displays a list of products in the cart along with their details and provides an option to remove them.
+ * Also shows the total price of all products in the cart.
+ */
 const Cart: React.FC<CartProps> = ({ totalPrice }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
+  // Get the products from the Redux store
   // @ts-ignore
-  const getChosenProduct = useSelector(state => state.cart.productsInCart)
+  const getChosenProduct = useSelector(state => state.cart.productsInCart);
 
+  /**
+   * Handler function to remove a product from the cart.
+   * Dispatches an action to remove the product from the Redux store.
+   * @param productId The ID of the product to be removed.
+   */
   const onClickRemoveFromCart = (productId: number) => {
     dispatch(removeProductFromCart(productId));
   }

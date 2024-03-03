@@ -4,10 +4,31 @@ import styles from "./Nav.module.scss";
 import Cart from "../Cart/Cart";
 import { useSelector } from 'react-redux'
 
+/**
+ * A functional component representing the navigation bar.
+ * Displays navigation links and a cart button.
+ */
 const Nav = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
 
+  /**
+   * Toggles the visibility of the menu.
+   */
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
+
+  /**
+   * Toggles the visibility of the cart.
+   */
+  const toggleCart = () => {
+    setShowCart(!showCart);
+  };
+
+  /**
+   * Represents a product in the cart.
+   */
   interface Product {
     id: number;
     title: string;
@@ -16,15 +37,10 @@ const Nav = () => {
     images: string[];
   }
 
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-  };
-
-  const toggleCart = () => {
-    setShowCart(!showCart);
-  };
-
+  // Get the products from the Redux store
   const chosenProducts = useSelector((state: { cart: { productsInCart: Product[] } }) => state.cart.productsInCart);
+
+  // Calculate the total price of all products in the cart
   const total = chosenProducts.reduce((acc, product) => acc + (product.price * product.quantity), 0);
 
   return (

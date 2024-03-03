@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { showSelectedProduct } from '../../utils/selectedProductSlice'
 import { PRODUCTS_ENDPOINT } from '../../utils/constants';
 
+/**
+ * Represents the details of a product.
+ */
 interface Product {
   id: number;
   title: string;
@@ -15,23 +18,34 @@ interface Product {
   images: string[];
 }
 
+/**
+ * Represents the props for the ProductDetails component.
+ */
 interface ProductsProps {
   category: number | null;
 }
 
+/**
+ * A component to display the details of a product.
+ * @param category The category of the product.
+ */
 const ProductDetails: React.FC<ProductsProps> = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   const dispatch = useDispatch()
 
+  // Get the chosen product ID from the Redux store
   // @ts-ignore
-  const getChosenProduct = useSelector(state => state.chosenProduct.selectedProductId)
+  const selectedProductId = useSelector(state => state.chosenProduct.selectedProductId)
 
   useEffect(() => {
+    /**
+     * Fetches the product details from the API.
+     */
     const fetchData = async () => {
       try {
-        const response = await fetch(`${PRODUCTS_ENDPOINT}/${getChosenProduct}`);
+        const response = await fetch(`${PRODUCTS_ENDPOINT}/${selectedProductId}`);
         const jsonData: Product = await response.json();
         setProduct(jsonData);
         setLoading(false);
@@ -40,7 +54,7 @@ const ProductDetails: React.FC<ProductsProps> = () => {
       }
     };
     fetchData();
-  }, [getChosenProduct]);
+  }, [selectedProductId]);
   
   return (
     <div>

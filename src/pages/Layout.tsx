@@ -4,6 +4,9 @@ import ProductDetails from "../components/ProductDetails/ProductDetails";
 import Nav from "../components/Nav/Nav";
 import { useSelector } from 'react-redux'
 
+/**
+ * Represents the layout of the application.
+ */
 const Layout = () => {
   // @ts-ignore
   const showModal = useSelector(state => state.chosenProduct.showModal)
