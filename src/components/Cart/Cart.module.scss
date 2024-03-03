@@ -11,4 +11,12 @@
   color: white;
   background-color: #333;
   z-index: 1;
+
+  .product {
+    display: flex;
+
+    &__image {
+      width: 50px;
+    }
+  }
 }

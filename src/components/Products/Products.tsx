@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Products.module.scss';
 import { useDispatch } from 'react-redux'
 import { showSelectedProduct, getSelectedProduct } from '../../utils/selectedProductSlice'
+import { addProductToCart } from '../../utils/cartSlice'
 import { isURL } from '../../utils/functions';
 
 interface Product {
@@ -25,9 +26,13 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
 
   const dispatch = useDispatch()
 
-  const onClickDispatch = (productId: number) => {
+  const onClickViewDetails = (productId: number) => {
     dispatch(getSelectedProduct(productId))
     dispatch(showSelectedProduct(true))
+  }
+
+  const onClickAddToCart = (product: Product) => {
+    dispatch(addProductToCart(product));
   }
 
   useEffect(() => {
@@ -66,14 +71,14 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
                 <div className={styles["product__category"]}>{product.category.name}</div>
                 <button
                   aria-label="View details"
-                  onClick={() => onClickDispatch(product.id)}
+                  onClick={() => onClickViewDetails(product.id)}
                   className={styles["product__button--details"]}
                 >
                   View details
                 </button>
                 <button
                   aria-label="Add to Cart"
-                  onClick={() => onClickDispatch(product.id)}
+                  onClick={() => onClickAddToCart(product)}
                   className={styles["product__button--add-to-cart"]}
                 >
                   Add to Cart
