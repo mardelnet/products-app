@@ -1,6 +1,5 @@
 export const API_URL = 'https://api.escuelajs.co/api/v1';
 
-export const API_ENDPOINT = {
-  'products': 'products',
-  'categories': 'categories',
-}
+export const PRODUCTS_ENDPOINT = `${API_URL}/products`;
+
+export const CATEGORIES_ENDPOINT = `${API_URL}/categories`;

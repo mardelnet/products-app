@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { showSelectedProduct, getSelectedProduct } from '../../utils/selectedProductSlice'
 import { addProductToCart } from '../../utils/cartSlice'
 import { isURL } from '../../utils/functions';
+import { PRODUCTS_ENDPOINT, CATEGORIES_ENDPOINT } from '../../utils/constants';
 
 interface Product {
   id: number;
@@ -38,10 +39,10 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let apiUrl = 'https://api.escuelajs.co/api/v1/products?offset=0&limit=16'
+        let apiUrl = `${PRODUCTS_ENDPOINT}?offset=0&limit=16`
 
         if( category ) {
-          apiUrl = `https://api.escuelajs.co/api/v1/categories/${category}/products?offset=0&limit=8`;
+          apiUrl = `${CATEGORIES_ENDPOINT}/${category}/products?offset=0&limit=8`;
         }
 
         const response = await fetch(apiUrl);

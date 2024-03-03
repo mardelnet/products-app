@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './ProductDetails.module.scss';
 import { useDispatch, useSelector } from 'react-redux'
 import { showSelectedProduct } from '../../utils/selectedProductSlice'
+import { PRODUCTS_ENDPOINT } from '../../utils/constants';
 
 interface Product {
   id: number;
@@ -30,7 +31,7 @@ const ProductDetails: React.FC<ProductsProps> = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://api.escuelajs.co/api/v1/products/${getChosenProduct}`);
+        const response = await fetch(`${PRODUCTS_ENDPOINT}/${getChosenProduct}`);
         const jsonData: Product = await response.json();
         setProduct(jsonData);
         setLoading(false);
