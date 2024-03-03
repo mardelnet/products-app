@@ -49,7 +49,7 @@ const Cart: React.FC<CartProps> = ({ totalPrice }) => {
     <div className={styles['cart-container']}>
       <div className={styles['products-container']}>
         {getChosenProduct && getChosenProduct.map((product: Product) => (
-          <div className={styles["product"]} key={product.id}>
+          <div className={styles["product"]} data-testid="product" key={product.id}>
             <img className={styles["product__image"]} src={product.images[0]} alt={product.title} />
             <div className={styles["product__price"]}>
               <div>{product.title}</div>
