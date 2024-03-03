@@ -2,10 +2,19 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Nav.module.scss";
 import Cart from "../Cart/Cart";
+import { useSelector } from 'react-redux'
 
 const Nav = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showCart, setShowCart] = useState(false);
+
+  interface Product {
+    id: number;
+    title: string;
+    price: number;
+    quantity: number;
+    images: string[];
+  }
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -14,6 +23,9 @@ const Nav = () => {
   const toggleCart = () => {
     setShowCart(!showCart);
   };
+
+  const chosenProducts = useSelector((state: { cart: { productsInCart: Product[] } }) => state.cart.productsInCart);
+  const total = chosenProducts.reduce((acc, product) => acc + (product.price * product.quantity), 0);
 
   return (
     <>
@@ -48,10 +60,10 @@ const Nav = () => {
           className={`${styles["cart-button"]} ${showCart ? styles.open : ""}`}
           onClick={toggleCart}
         >
-          CART: $0.00
+          CART: ${total}
         </button>
       </nav>
-      {showCart && (<Cart />)}
+      {showCart && (<Cart totalPrice={total} />)}
     </>
   )
 };
