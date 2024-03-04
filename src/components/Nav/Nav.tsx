@@ -34,7 +34,7 @@ const Nav = () => {
     title: string;
     price: number;
     quantity: number;
-    images: string[];
+    image: string;
   }
 
   // Get the products from the Redux store
@@ -51,19 +51,16 @@ const Nav = () => {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/clothes">Clothes</Link>
+            <Link to="/women">Women's Clothing</Link>
+          </li>
+          <li>
+            <Link to="/men">Men's Clothing</Link>
           </li>
           <li>
             <Link to="/electronics">Electronics</Link>
           </li>
           <li>
-            <Link to="/furniture">Furniture</Link>
-          </li>
-          <li>
-            <Link to="/shoes">Shoes</Link>
-          </li>
-          <li>
-            <Link to="/miscellaneous">Miscellaneous</Link>
+            <Link to="/jewelery">Jewelery</Link>
           </li>
         </ul>
         <button

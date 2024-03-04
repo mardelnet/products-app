@@ -12,7 +12,7 @@ interface Product {
   title: string;
   price: number;
   quantity: number;
-  images: string[];
+  image: string;
 }
 
 /**
@@ -53,7 +53,7 @@ const Cart: React.FC<CartProps> = ({ totalPrice }) => {
           <div className={styles["product"]} data-testid="product" key={product.id}>
             <img 
                 className={styles["product__image"]} 
-                src={isURL(product.images[0]) ? product.images[0] : 'placeholder.png'} 
+                src={isURL(product.image) ? product.image : 'placeholder.png'} 
                 alt={product.title} />
             <div className={styles["product__price"]}>
               <div>{product.title}</div>

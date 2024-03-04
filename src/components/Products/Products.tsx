@@ -14,17 +14,15 @@ interface Product {
   title: string;
   price: number;
   description: string;
-  category: {
-    name: string;
-  };
-  images: string[];
+  category: string;
+  image: string;
 }
 
 /**
  * Represents the props for the Products component.
  */
 interface ProductsProps {
-  category: number | null;
+  category: string | null;
 }
 
 /**
@@ -60,15 +58,16 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
      */
     const fetchData = async () => {
       try {
-        let apiUrl = `${PRODUCTS_ENDPOINT}?offset=0&limit=16`
-
-        if( category ) {
-          apiUrl = `${CATEGORIES_ENDPOINT}/${category}/products?offset=0&limit=8`;
-        }
-
-        const response = await fetch(apiUrl);
+        const response = await fetch(`${PRODUCTS_ENDPOINT}`);
         const jsonData: Product[] = await response.json();
-        setProducts(jsonData);
+
+        if (category) {
+          const categoryProducts = jsonData.filter(product => product.category === category);
+          setProducts(categoryProducts);
+        } else {
+          setProducts(jsonData);
+        }
+        
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -91,11 +90,11 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
             <div className={styles["product"]} key={product.id}>
               <img 
                 className={styles["product__image"]} 
-                src={isURL(product.images[0]) ? product.images[0] : 'placeholder.png'} 
+                src={isURL(product.image) ? product.image : 'placeholder.png'} 
                 alt={product.title} />
               <h4 className={styles["product__title"]}>{product.title}</h4>
               <div className={styles["product__price"]}>$ {product.price}</div>
-              <div className={styles["product__category"]}>{product.category.name}</div>
+              <div className={styles["product__category"]}>{product.category}</div>
               <button
                 aria-label="View details"
                 onClick={() => onClickViewDetails(product.id)}

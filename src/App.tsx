@@ -13,10 +13,10 @@ function App() {
    * Wrapper component for the Products component.
    * Manages the category prop and provides it to the Products component.
    * @param {Object} props - Props for the ProductsWrapper component.
-   * @param {number | null} props.category - The category ID for filtering products.
+   * @param {string | null} props.category - The category ID for filtering products.
    * @returns {JSX.Element} - JSX element representing the Products component with the specified category.
    */
-  function ProductsWrapper({ category }: { category: number | null }) {
+  function ProductsWrapper({ category }: { category: string | null }) {
     const location = useLocation();
     return <Products key={location.pathname} category={category} />;
   }
@@ -26,11 +26,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<ProductsWrapper category={null} data-testid="products" />} />
-          <Route path="clothes" element={<ProductsWrapper category={1} />} />
-          <Route path="electronics" element={<ProductsWrapper category={2} />} />
-          <Route path="furniture" element={<ProductsWrapper category={3} />} />
-          <Route path="shoes" element={<ProductsWrapper category={4} />} />
-          <Route path="miscellaneous" element={<ProductsWrapper category={5} />} />
+          <Route path="women" element={<ProductsWrapper category={"women's clothing"} />} />
+          <Route path="men" element={<ProductsWrapper category={"men's clothing"} />} />
+          <Route path="electronics" element={<ProductsWrapper category={'electronics'} />} />
+          <Route path="jewelery" element={<ProductsWrapper category={'jewelery'} />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
