@@ -20,16 +20,16 @@ describe('Products component', () => {
       title: 'Test Product 1',
       price: 10,
       description: 'Test Description 1',
-      category: { name: 'Test Category 1' },
-      images: ['test-image-1.jpg']
+      category: 'Test Category 1',
+      image: 'test-image-1.jpg'
     },
     {
       id: 2,
       title: 'Test Product 2',
       price: 20,
       description: 'Test Description 2',
-      category: { name: 'Test Category 2' },
-      images: ['test-image-2.jpg']
+      category: 'Test Category 2',
+      image: 'test-image-2.jpg'
     }
   ];
 

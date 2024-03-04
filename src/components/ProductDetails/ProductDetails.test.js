@@ -20,8 +20,8 @@ describe('ProductDetails component', () => {
       title: 'Test Product',
       price: 10,
       description: 'Test description',
-      category: { name: 'Test Category' },
-      images: ['test-image.jpg'],
+      category: 'Test Category',
+      image: 'test-image.jpg',
     };
 
     jest.spyOn(global, 'fetch').mockResolvedValueOnce({

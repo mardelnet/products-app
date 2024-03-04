@@ -44,11 +44,10 @@ describe('Nav component', () => {
 
     // Check if navigation links are rendered
     expect(screen.getByText('Home')).toBeInTheDocument();
-    expect(screen.getByText('Clothes')).toBeInTheDocument();
     expect(screen.getByText('Electronics')).toBeInTheDocument();
-    expect(screen.getByText('Furniture')).toBeInTheDocument();
-    expect(screen.getByText('Shoes')).toBeInTheDocument();
-    expect(screen.getByText('Miscellaneous')).toBeInTheDocument();
+    expect(screen.getByText('Jewelery')).toBeInTheDocument();
+    expect(screen.getByText("Men's Clothing")).toBeInTheDocument();
+    expect(screen.getByText("Women's Clothing")).toBeInTheDocument();
   });
 });
 
