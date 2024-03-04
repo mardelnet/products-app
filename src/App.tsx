@@ -25,7 +25,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<ProductsWrapper category={null} />} />
+          <Route index element={<ProductsWrapper category={null} data-testid="products" />} />
           <Route path="clothes" element={<ProductsWrapper category={1} />} />
           <Route path="electronics" element={<ProductsWrapper category={2} />} />
           <Route path="furniture" element={<ProductsWrapper category={3} />} />

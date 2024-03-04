@@ -68,7 +68,6 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
 
         const response = await fetch(apiUrl);
         const jsonData: Product[] = await response.json();
-        console.log(jsonData)
         setProducts(jsonData);
         setLoading(false);
       } catch (error) {
