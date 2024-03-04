@@ -3,6 +3,7 @@ import styles from './ProductDetails.module.scss';
 import { useDispatch, useSelector } from 'react-redux'
 import { showSelectedProduct } from '../../utils/selectedProductSlice'
 import { PRODUCTS_ENDPOINT } from '../../utils/constants';
+import { isURL } from '../../utils/functions';
 
 /**
  * Represents the details of a product.
@@ -70,7 +71,10 @@ const ProductDetails: React.FC<ProductsProps> = () => {
                   className={styles["product__close"]}>
                     x
                 </button>
-                <img className={styles["product__image"]} src={product.images[0]} alt={product.title} />
+                <img 
+                  className={styles["product__image"]} 
+                  src={isURL(product.images[0]) ? product.images[0] : 'placeholder.png'} 
+                  alt={product.title} />
               </div>
               <div className={styles["product__column"]}>
                 <h4 className={styles["product__title"]}>{product.title}</h4>

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from "./Cart.module.scss";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeProductFromCart } from '../../utils/cartSlice';
+import { isURL } from '../../utils/functions';
 
 /**
  * Interface for representing a product in the cart.
@@ -50,7 +51,10 @@ const Cart: React.FC<CartProps> = ({ totalPrice }) => {
       <div className={styles['products-container']}>
         {getChosenProduct && getChosenProduct.map((product: Product) => (
           <div className={styles["product"]} data-testid="product" key={product.id}>
-            <img className={styles["product__image"]} src={product.images[0]} alt={product.title} />
+            <img 
+                className={styles["product__image"]} 
+                src={isURL(product.images[0]) ? product.images[0] : 'placeholder.png'} 
+                alt={product.title} />
             <div className={styles["product__price"]}>
               <div>{product.title}</div>
               $ {product.price} x {product.quantity} units

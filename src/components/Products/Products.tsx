@@ -68,6 +68,7 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
 
         const response = await fetch(apiUrl);
         const jsonData: Product[] = await response.json();
+        console.log(jsonData)
         setProducts(jsonData);
         setLoading(false);
       } catch (error) {
@@ -84,29 +85,33 @@ const Products: React.FC<ProductsProps> = ({ category }) => {
         <div>Loading...</div>
       ) : (
         <div className={styles["products-container"]}>
-          {products && products.map((product) => (
-            isURL(product.images[0]) && (
-              <div className={styles["product"]} key={product.id}>
-                <img className={styles["product__image"]} src={product.images[0]} alt={product.title} />
-                <h4 className={styles["product__title"]}>{product.title}</h4>
-                <div className={styles["product__price"]}>$ {product.price}</div>
-                <div className={styles["product__category"]}>{product.category.name}</div>
-                <button
-                  aria-label="View details"
-                  onClick={() => onClickViewDetails(product.id)}
-                  className={styles["product__button--details"]}
-                >
-                  View details
-                </button>
-                <button
-                  aria-label="Add to Cart"
-                  onClick={() => onClickAddToCart(product)}
-                  className={styles["product__button--add-to-cart"]}
-                >
-                  Add to Cart
-                </button>
-              </div>
-            )
+          {products && products.length === 0 && (
+            <div>No products were found.</div>
+          )}
+          {products && products.length > 0 && products.map((product) => (
+            <div className={styles["product"]} key={product.id}>
+              <img 
+                className={styles["product__image"]} 
+                src={isURL(product.images[0]) ? product.images[0] : 'placeholder.png'} 
+                alt={product.title} />
+              <h4 className={styles["product__title"]}>{product.title}</h4>
+              <div className={styles["product__price"]}>$ {product.price}</div>
+              <div className={styles["product__category"]}>{product.category.name}</div>
+              <button
+                aria-label="View details"
+                onClick={() => onClickViewDetails(product.id)}
+                className={styles["product__button--details"]}
+              >
+                View details
+              </button>
+              <button
+                aria-label="Add to Cart"
+                onClick={() => onClickAddToCart(product)}
+                className={styles["product__button--add-to-cart"]}
+              >
+                Add to Cart
+              </button>
+            </div>
           ))}
         </div>
       )}
